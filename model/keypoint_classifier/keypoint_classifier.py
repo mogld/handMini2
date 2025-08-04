@@ -2,13 +2,15 @@
 # -*- coding: utf-8 -*-
 import numpy as np
 import tflite_runtime.interpreter as tflite
+import csv
 
 
 class KeyPointClassifier(object):
     def __init__(
         self,
-        model_path='model/keypoint_classifier/keypoint_classifier.tflite',
+        model_path='model/keypoint_classifier/keypoint_classifier_base.tflite',
         num_threads=1,
+        label_path='model/keypoint_classifier/keypoint_classifier_label.csv'
     ):
         self.interpreter = tflite.Interpreter(model_path=model_path,
                                                num_threads=num_threads)
@@ -16,6 +18,8 @@ class KeyPointClassifier(object):
         self.interpreter.allocate_tensors()
         self.input_details = self.interpreter.get_input_details()
         self.output_details = self.interpreter.get_output_details()
+        with open(label_path, encoding='utf-8-sig') as f:
+            self.labels = [row[0] for row in csv.reader(f)]
 
     def __call__(
         self,
