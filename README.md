@@ -29,31 +29,15 @@
 
 ## 데모 시연
 ![OCR Gesture Demo](video_hand.gif)
-                  
-## 프로젝트 구조
-
-```
-handMini2/
-├── main.py               # 메인 실행 파일 (제스처 기반 OCR 트리거)
-├── utils/
-│   └── calc_landmark.py  # 손 랜드마크 전처리 함수
-├── model/
-│   └── keypoint_classifier/
-│       ├── keypoint_classifier.py        # 제스처 분류기
-│       ├── keypoint_classifier.tflite    # 경량 MLP 모델
-│       └── label.txt                     # 제스처 클래스 이름 (Open, Pointer 등)
-├── ocr_bridge.py         #  OCR 실행 dumy 함수 
-└── ...
-```
-
+                
 ## 설치 방법 (Raspberry Pi 5 기준)
 
 ```bash
-#
+
 sudo apt update
 sudo apt install python3-opencv python3-picamera2 python3-tk
 
-# 가상환경 생성 및 필요한 패키지 설치
+# 가상환경 및 필요한 패키지 설치
 python3 -m venv .venv
 source .venv/bin/activate
 pip install --no-deps tflite-runtime
